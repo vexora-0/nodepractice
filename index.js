@@ -50,12 +50,22 @@ const http = require('http');
 const {read} = require('fs');
 
 const server = http.createServer((req, res) => {
-    res.setHeader('content-type', 'text/html');
-    res.write('<html> <head> <title>my first page</title> </head> <body>');
-    res.write('<h1>Hello World</h1>');
-    res.write('</body> </html>');
+    if(req.url === '/login'){
+        res.setHeader('content-type', 'text/html');
+        res.write('<html> <head> <title>my first page</title> </head> <body>');
+        res.write('<h1>Hello login</h1>');
+        res.write('</body> </html>');    
+    }
+    else{
+        res.setHeader('content-type', 'text/html');
+        res.write('<html> <head> <title>my first page</title> </head> <body>');
+        res.write('<h1>Hello World</h1>');
+        res.write('</body> </html>');
+    }
     res.end();
-})
-server.listen(3000, () => {
-    console.log('Server is listening on port 3000');
+});
+const port = 3000;
+const host = 'localhost';
+server.listen(port, host, () => {
+    console.log('Server is listening on port', port);
 });
