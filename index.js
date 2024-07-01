@@ -47,25 +47,20 @@
 // // });
 // //// making server
 const http = require('http');
-const {read} = require('fs');
-
+const fs = require('fs');
+const ht = fs.readFileSync('index.html');
+const login = fs.readFileSync('login.html');
 const server = http.createServer((req, res) => {
     if(req.url === '/login'){
-        res.setHeader('content-type', 'text/html');
-        res.write('<html> <head> <title>my first page</title> </head> <body>');
-        res.write('<h1>Hello login</h1>');
-        res.write('</body> </html>');    
+        res.write(login);
     }
     else{
-        res.setHeader('content-type', 'text/html');
-        res.write('<html> <head> <title>my first page</title> </head> <body>');
-        res.write('<h1>Hello World</h1>');
-        res.write('</body> </html>');
+        res.write(ht);
     }
     res.end();
 });
 const port = 3000;
 const host = 'localhost';
 server.listen(port, host, () => {
-    console.log('Server is listening on port', port);
+    console.log('Server is listening on http://localhost:3000');
 });
